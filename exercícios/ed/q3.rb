@@ -10,7 +10,6 @@ cores = {'Preto' => '0',
       'Branco' => '9'
     }
 codigo = gets().chomp.split('-', )
-p codigo
 resistencia = cores[codigo[0]].to_s + cores[codigo[1]].to_s
-print(resistencia)
+p(resistencia)
 
