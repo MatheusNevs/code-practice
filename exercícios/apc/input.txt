@@ -1,5 +1,14 @@
+<<<<<<< HEAD
 2 4 3 2 
 3
 1 1
 2 2 
 3 3
+=======
+Pirarucu   500.00
+Tambaqui   200.00
+Curimatã 55.59
+Surubim  77.89
+Piranha 10.00
+fim -2.00
+>>>>>>> 7ff8098fd86774c5f223836e8595f3a29ede2616
