@@ -1,6 +1,2 @@
-Pirarucu   500.00
-Tambaqui   200.00
-Curimatã 55.59
-Surubim  77.89
-Piranha 10.00
-fim -2.00
+1 45 78 10 2 5 4 0
+5
