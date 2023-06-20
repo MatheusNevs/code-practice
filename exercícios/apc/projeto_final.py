@@ -21,7 +21,7 @@ def checar_endereco(frase):
 
 
 def checar_area(frase):
-    
+    ...    
 
 
 
