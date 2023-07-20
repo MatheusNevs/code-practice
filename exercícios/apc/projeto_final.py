@@ -34,10 +34,10 @@ def checar_endereco(frase):
                 break
 
     endereco = endereco[:endereco.find(numero) + len(numero)]
-    modelo_cep = ' 00000-000'
+    modelo_cep = '00000-000'
     frase_codificada = codificar(frase)
-    if modelo_cep in frase_codificada and frase[frase_codificada.find(modelo_cep) + 10].isnumeric() == False:
-        cep =  frase[frase_codificada.find(modelo_cep): frase_codificada.find(modelo_cep) + 10]
+    if modelo_cep in frase_codificada and frase[frase_codificada.find(modelo_cep) + 9].isnumeric() == False:
+        cep =  frase[frase_codificada.find(modelo_cep): frase_codificada.find(modelo_cep) + 9]
 
     return f'Endereco: {endereco}\nCEP: {cep.strip()}'
 
@@ -66,15 +66,18 @@ def checar_valor(frase):
     return f'Valor: {valor}'
 
 def checar_telefone(frase):
-    modelo_telefone1 = ' 0000-0000'
-    modelo_telefone2 = ' 00000-0000'
+    modelo_telefone1 = '00000-0000'
+    modelo_telefone2 = '0000-0000'
     telefones = []
     frase_codificada = codificar(frase)
     frase_aux = frase
-    if modelo_telefone1 in  frase_codificada:
-        telefones.append(frase_aux[frase_codificada.find(modelo_telefone1): frase_codificada.find(modelo_telefone1)+ 10])
+    if modelo_telefone1 in frase_codificada:
+        telefone = frase_aux[frase_codificada.find(modelo_telefone1): frase_codificada.find(modelo_telefone1)+ 10]
+        telefones.append(telefone)
+        frase_aux = frase_aux.replace(telefone, '')
+        frase_codificada = frase_codificada.replace(modelo_telefone1, '')
     if modelo_telefone2 in  frase_codificada:
-        telefones.append(frase_aux[frase_codificada.find(modelo_telefone2): frase_codificada.find(modelo_telefone2) + 11])
+        telefones.append(frase_aux[frase_codificada.find(modelo_telefone2): frase_codificada.find(modelo_telefone2)+ 9])
     telefones.sort(key = lambda x: frase.find(x))
     telefones = [x.strip() for x in telefones]
     return f"Telefone: {', '.join(telefones)}" if len(telefones) == 1 else f"Telefones: {', '.join(telefones)}"
@@ -98,7 +101,7 @@ def checar_responsavel(frase):
 modalidade = [['Aluguel', 'aluguel', 'alugo', 'alugar'], ['Venda', 'venda', 'vendo', 'vender']]
 tipo = [['Casa', 'casa'], ['Apartamento', 'apartamento']]
 
-n =0 
+n = 0 
 while True:
     try:
         n += 1
@@ -114,3 +117,4 @@ while True:
         print()
     except EOFError:
         break
+
