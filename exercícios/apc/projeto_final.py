@@ -16,6 +16,7 @@ def checar_mt(frase, list1, list2):
         if i in frase.lower():
             return list2[0]
 
+
 def checar_endereco(frase):
     endereco = ''
     cep = 'nao informado'
@@ -41,6 +42,7 @@ def checar_endereco(frase):
 
     return f'Endereco: {endereco}\nCEP: {cep.strip()}'
 
+
 def checar_area(frase):
     area = 'nao informado'
     if 'metros' in frase or 'm2' in frase:
@@ -51,6 +53,7 @@ def checar_area(frase):
             if 'm2' in i:
                 area = frase_aux[k - 1]
     return f'Area: {area}'
+
 
 def checar_valor(frase):
     valor = 'nao informado'
@@ -64,6 +67,7 @@ def checar_valor(frase):
         if valor[-1].isnumeric() == False:
             valor = valor[:-1]
     return f'Valor: {valor}'
+
 
 def checar_telefone(frase):
     modelo_telefone1 = '00000-0000'
@@ -101,20 +105,13 @@ def checar_responsavel(frase):
 modalidade = [['Aluguel', 'aluguel', 'alugo', 'alugar'], ['Venda', 'venda', 'vendo', 'vender']]
 tipo = [['Casa', 'casa'], ['Apartamento', 'apartamento']]
 
-n = 0 
-while True:
-    try:
-        n += 1
-        print(f'teste {n}')
-        frase = input()
-        print(f'Modalidade: {checar_mt(frase, *modalidade)}')
-        print(f'Tipo: {checar_mt(frase, *tipo)}')
-        print(checar_endereco(frase))
-        print(checar_area(frase))
-        print(checar_valor(frase))
-        print(checar_telefone(frase))
-        print(checar_responsavel(frase))
-        print()
-    except EOFError:
-        break
+frase = input()
+print(f'Modalidade: {checar_mt(frase, *modalidade)}')
+print(f'Tipo: {checar_mt(frase, *tipo)}')
+print(checar_endereco(frase))
+print(checar_area(frase))
+print(checar_valor(frase))
+print(checar_telefone(frase))
+print(checar_responsavel(frase))
+
 
