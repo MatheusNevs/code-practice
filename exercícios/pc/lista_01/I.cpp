@@ -1,38 +1,39 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main () {
-    int n,m, nnovo = n, mnovo = m;
-    vector<string> matriz;
+int main() {
+    int n, m, menorb, maiorb = 0, menorh, maiorh = 0;
+    bool um = false;
+    cin >> n >> m;
+    menorb = m;
+    menorh = n;
+
     for (int i = 0; i < n; i++) {
         string linha;
-        bool found = false;
         cin >> linha;
         for (int j = 0; j < m; j++) {
             if (linha[j] == '1') {
-                found = true;
-                break;
+                um = true;
+                if (j < menorb){
+                menorb = j;
+                }
+                if (j > maiorb){
+                    maiorb = j;
+                }
+                if (i > maiorh) {
+                    maiorh = i;
+                }
+                if (i < menorh){
+                    menorh = i;
+                }
             }
         }
-        if (found == true){
-            matriz.push_back(linha);
-        } else {
-            nnovo -= 1;
-        }
     }
-
-    for (int i = 0; i < m; i++) {
-        bool found = false;
-        for (int j = 0; j < m; j++) {
-            if (matriz[i][j] == '1')
-                found = true;
-        }
-        if (found == false)
-        mnovo -= 1;
-    }
-
-    cout << nnovo << "x" << mnovo;
+    if (um)
+        cout << (maiorb - menorb + 1) << "x" << (maiorh - menorh + 1) << "\n";
+    else
+    cout << '0' << 'x' << '0' << '\n';
     return 0;
     }
-
+    
 
