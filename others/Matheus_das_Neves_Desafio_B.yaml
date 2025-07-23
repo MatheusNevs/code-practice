@@ -1,0 +1,49 @@
+# Arquivo de configuração de rede Netplan para o servidor GigaNuvem
+# Configura duas interfaces de rede agregadas (bond) usando LACP (802.3ad).
+
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    # --- Interfaces físicas que farão parte do bond0 (Rede de Acesso) ---
+    eno1: # Interface Onboard
+      dhcp4: no
+      dhcp6: no
+
+    enp1s0f0: # Interface Dual_1
+      dhcp4: no
+      dhcp6: no
+
+    # --- Interfaces físicas que farão parte do bond1 (Rede de Cluster) ---
+    enp4s0: # Interface Single
+      dhcp4: no
+      dhcp6: no
+
+    enp1s0f1: # Interface Dual_2
+      dhcp4: no
+      dhcp6: no
+
+  bonds:
+    # --- Agregação para a Rede de Acesso ---
+    bond0:
+      interfaces: [eno1, enp1s0f0]
+      addresses: [10.1.0.1/24]
+      gateway4: 10.1.0.0 # Gateway para a rede externa
+      nameservers:
+        addresses: [10.1.0.100]
+      parameters:
+        mode: 802.3ad
+        mii-monitor-interval: 100
+        lacp-rate: fast
+        transmit-hash-policy: layer3+4
+
+    # --- Agregação para a Rede de Clusterização ---
+    bond1:
+      interfaces: [enp4s0, enp1s0f1]
+      addresses: [10.2.0.1/24]
+      gateway4: 10.2.0.0
+      parameters:
+        mode: 802.3ad
+        mii-monitor-interval: 100
+        lacp-rate: fast
+        transmit-hash-policy: layer3+4
